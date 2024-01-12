@@ -47,8 +47,17 @@ document.querySelectorAll("#post-form input").forEach((input) => {
     console.log(postObject);
     let result = await createPostInDb(postObject);
     //console.log(result);
-
+    alert("post publicado!")
+    clearForm();
   });
+
+  const clearForm=()=>{
+    titleField.value=("")
+    descriptionField.value=("")
+    nameField.value=("")
+    imgField.value=("")
+    dateField.value=("")
+  }
   let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
   let usersWrapper = document.getElementById("users-wrapper");
   
