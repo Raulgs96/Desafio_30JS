@@ -14,6 +14,11 @@ document.querySelectorAll("#post-form input").forEach((input) => {
   const createPostObject = () => {
 
     let postObject = { title, description, name ,img ,imgprofile,date};
+    titleField.value=""
+    descriptionField.value=""
+    nameField.value=""
+    imgField.value=""
+    dateField.value=""
     if (title && description && description) {
       return postObject;
     } else {
