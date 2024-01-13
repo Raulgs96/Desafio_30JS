@@ -234,7 +234,7 @@ const getAllCards = async (card) => {
   const createCardItem=(cardData)=>{
     let { title, img, date} = cardData;
     let cardli=document.createElement("div");
-    cardli.classList.add("card")
+    cardli.classList.add("card","mb-3")
 
     /* card */
     
@@ -257,5 +257,4 @@ const getAllCards = async (card) => {
     cardli.append(picturespan,titleSpan, fecha);
     return cardli;
   }
-  document.write("prueba")
   getAllCards();
