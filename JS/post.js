@@ -19,7 +19,7 @@ document.querySelectorAll("#post-form input").forEach((input) => {
     nameField.value=""
     imgField.value=""
     dateField.value=""
-    if (title && description && description) {
+    if (titleField.value && descriptionField.value && nameField.value && imgField.value && dateField.value) {
       return postObject;
     } else {
       document.getElementById("form-alert").classList.remove("d-none");
