@@ -1,7 +1,6 @@
 let token = localStorage.getItem("token");
 const login = () => {
 
-
 let mail =document.getElementById("mail").value;
 let pass = document.getElementById("password").value;
 if (mail && pass){
@@ -12,9 +11,6 @@ if (mail && pass){
 }
 
 }
-
-
-
 
 let loginButton = document.getElementById("btn-create-login");
 loginButton.addEventListener("click", login);
