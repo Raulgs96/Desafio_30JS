@@ -45,7 +45,7 @@ document.querySelectorAll("#post-form input").forEach((input) => {
     let description = descriptionField.value
     let name = nameField.value
     let img = imgField.value
-    let date = dateField.value
+    let date = dateField.value 
 
     let postObject = {title, description, name, img, date}
   

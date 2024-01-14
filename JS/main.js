@@ -1,4 +1,4 @@
-let postEntries = [];
+/*let postEntries = [];
 let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
 let usersWrapper = document.getElementById("users-wrapper");
 const getAllEntries = async () => {
@@ -131,6 +131,8 @@ latestButtom.addEventListener("click",() => {
   printAllEntries(latestArray)
 })
 
+
+
 const sortTopCriteria = (a, b) => {
   if (a.comments_count> b.comments_count) {
     return -1;
@@ -151,7 +153,9 @@ const sortLatestCriteria = (a, b) => {
   }
   // a must be equal to b
   return 0;
-};
+}; */
+
+
 //logout
 const logOut = () => {
   localStorage.removeItem("token");
@@ -181,7 +185,7 @@ logOutButton.addEventListener("click", logOut);
 
 
 
-let filterField = document.getElementById("filter-by-name");
+/* let filterField = document.getElementById("filter-by-name");
 filterField.addEventListener("keyup", (event) => {
   let filterAlert = document.getElementById("filter-alert");
   filterAlert.classList.add("d-none");
@@ -195,7 +199,7 @@ filterField.addEventListener("keyup", (event) => {
   }
   console.log(filterResult);
   printProductCards(filterResult);
-});
+}); */
 
 
 
@@ -257,4 +261,84 @@ const getAllCards = async (card) => {
     cardli.append(picturespan,titleSpan, fecha);
     return cardli;
   }
-  getAllCards();
+  //getAllCards();
+
+// FILTERS
+
+let relevantButtom = document.getElementById("relevantButtom")
+let latestButtom = document.getElementById("latestButtom")
+let topButtom = document.getElementById("topButtom")
+let search = document.getElementById("filter-by-name")
+
+
+eventListeners ()
+
+function eventListeners () {
+  relevantButtom.addEventListener("click", relevantFuncion)
+  latestButtom.addEventListener("click", lastestFunction)
+  topButtom.addEventListener("click", topFunction)
+  search.addEventListener(" input", searchFunction)
+}
+
+
+
+
+function relevantFuncion () {
+  /*let nuevoArray = printAllCards().filter((objeto)=>{ 
+    let numberOfName = objeto.title.length;
+    return numberOfName > 10;
+  });
+  printAllCards() = nuevoArray;
+  printAllCards(); */
+  console.log("si sirvo relevant") 
+} 
+
+/* const relevantFuncion = async (card) => {
+  let response = await fetch(
+    basedata,{
+      method:"GET",
+      body:JSON.stringify(card),
+    }
+  );
+  let data = await response.json();
+  let nuevoArray = data.filter((objeto)=>{ 
+      let numberOfName = objeto.title.length;
+      return numberOfName > 1000;
+    });
+    data = nuevoArray;
+    printAllCards() 
+    console.log("si sirvo")
+}; */
+
+/* relevantButtom.addEventListener("click", async () => {
+  let response = await fetch(
+    basedata,{
+      method:"GET",
+    }
+  );
+  let data = await response.json();
+  let nuevoArray = data.filter((objeto) =>{ 
+      let numberOfName = objeto.title.length;
+      return numberOfName > 1000;
+    });
+    data = nuevoArray;
+    printAllCards()
+    console.log ("si sirvo")
+}) */
+
+
+function lastestFunction () {
+    console.log("Si sirvo Lastest")
+}
+
+function topFunction () {
+    console.log("Si sirvo TOP")
+    
+}
+
+function searchFunction (e) {
+  let busquedaValor = e.target.value.toLowerCase();
+  console.log(busquedaValor)
+}
+
+//
