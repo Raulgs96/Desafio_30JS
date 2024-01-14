@@ -205,7 +205,7 @@ filterField.addEventListener("keyup", (event) => {
 
 /*cards */
 let basedata = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
-
+let datosObtenidos;
 const getAllCards = async (card) => {
     let response = await fetch(
       basedata,{
@@ -214,10 +214,15 @@ const getAllCards = async (card) => {
       }
     );
     let data = await response.json();
+    
+    let cardsArray = Object.keys(data).map((key) => ({ ...data[key], key }));
+    datosObtenidos=cardsArray
     /*ya que tenemos las canciones, imprimimos todas las canciones*/
     console.log(data)
-    printAllCards(data);
+    printAllCards(cardsArray);
   };
+
+  
 
   const printAllCards = (cards) => {
     console.log(cards);
@@ -225,11 +230,10 @@ const getAllCards = async (card) => {
     cardslist.innerHTML = "";
   
     /*Aquí convertimos las canciones de la base de datos en un array*/
-    let cardsArray = Object.keys(cards).map((key) => ({ ...cards[key], key }));
-    console.log(cardsArray);
-  
+    console.log(cards);
+
     /*iteramos en el array para crear un li por cada canción*/
-    cardsArray.forEach((card) => {
+    cards.forEach((card) => {
         let cardItem = createCardItem(card);
         cardslist.append(cardItem);
       });
@@ -261,7 +265,7 @@ const getAllCards = async (card) => {
     cardli.append(picturespan,titleSpan, fecha);
     return cardli;
   }
-  //getAllCards();
+  getAllCards();
 
 // FILTERS
 
@@ -284,52 +288,24 @@ function eventListeners () {
 
 
 function relevantFuncion () {
-  /*let nuevoArray = printAllCards().filter((objeto)=>{ 
+  let relevantPost = datosObtenidos.filter((objeto)=>{ 
     let numberOfName = objeto.title.length;
-    return numberOfName > 10;
+    console.log("si sirvo relevant") 
+    
+    return numberOfName > 15;
+    
   });
-  printAllCards() = nuevoArray;
-  printAllCards(); */
-  console.log("si sirvo relevant") 
+  printAllCards(relevantPost); 
 } 
 
-/* const relevantFuncion = async (card) => {
-  let response = await fetch(
-    basedata,{
-      method:"GET",
-      body:JSON.stringify(card),
-    }
-  );
-  let data = await response.json();
-  let nuevoArray = data.filter((objeto)=>{ 
-      let numberOfName = objeto.title.length;
-      return numberOfName > 1000;
-    });
-    data = nuevoArray;
-    printAllCards() 
-    console.log("si sirvo")
-}; */
-
-/* relevantButtom.addEventListener("click", async () => {
-  let response = await fetch(
-    basedata,{
-      method:"GET",
-    }
-  );
-  let data = await response.json();
-  let nuevoArray = data.filter((objeto) =>{ 
-      let numberOfName = objeto.title.length;
-      return numberOfName > 1000;
-    });
-    data = nuevoArray;
-    printAllCards()
-    console.log ("si sirvo")
-}) */
 
 
 function lastestFunction () {
-    console.log("Si sirvo Lastest")
-}
+  let lastDate = datosObtenidos.sort((a, b) => new Date (b.date) - new Date (a.date));
+  console.log(lastDate)
+  printAllCards(lastDate)
+
+} 
 
 function topFunction () {
     console.log("Si sirvo TOP")
