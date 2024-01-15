@@ -1,4 +1,4 @@
-let postEntries = [];
+/*let postEntries = [];
 let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
 let usersWrapper = document.getElementById("users-wrapper");
 const getAllEntries = async () => {
@@ -131,6 +131,8 @@ latestButtom.addEventListener("click",() => {
   printAllEntries(latestArray)
 })
 
+
+
 const sortTopCriteria = (a, b) => {
   if (a.comments_count> b.comments_count) {
     return -1;
@@ -151,7 +153,9 @@ const sortLatestCriteria = (a, b) => {
   }
   // a must be equal to b
   return 0;
-};
+}; */
+
+
 //logout
 const logOut = () => {
   localStorage.removeItem("token");
@@ -181,7 +185,7 @@ logOutButton.addEventListener("click", logOut);
 
 
 
-let filterField = document.getElementById("filter-by-name");
+/* let filterField = document.getElementById("filter-by-name");
 filterField.addEventListener("keyup", (event) => {
   let filterAlert = document.getElementById("filter-alert");
   filterAlert.classList.add("d-none");
@@ -195,4 +199,122 @@ filterField.addEventListener("keyup", (event) => {
   }
   console.log(filterResult);
   printProductCards(filterResult);
-});
+}); */
+
+
+
+/*cards */
+let basedata = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
+let datosObtenidos;
+const getAllCards = async (card) => {
+    let response = await fetch(
+      basedata,{
+        method:"GET",
+        body:JSON.stringify(card),
+      }
+    );
+    let data = await response.json();
+    
+    let cardsArray = Object.keys(data).map((key) => ({ ...data[key], key }));
+    datosObtenidos=cardsArray
+    /*ya que tenemos las canciones, imprimimos todas las canciones*/
+    console.log(data)
+    printAllCards(cardsArray);
+  };
+
+  
+
+  const printAllCards = (cards) => {
+    console.log(cards);
+    let cardslist = document.getElementById("cards-list");
+    cardslist.innerHTML = "";
+  
+    /*Aquí convertimos las canciones de la base de datos en un array*/
+    console.log(cards);
+
+    /*iteramos en el array para crear un li por cada canción*/
+    cards.forEach((card) => {
+        let cardItem = createCardItem(card);
+        cardslist.append(cardItem);
+      });
+  };
+
+  const createCardItem=(cardData)=>{
+    let { title, img, date} = cardData;
+    let cardli=document.createElement("div");
+    cardli.classList.add("card","mb-3")
+
+    /* card */
+    
+
+    let picturespan=document.createElement("img")
+    picturespan.src=img
+    picturespan.classList.add("card-img-top")
+
+    let divbody=document.createElement("div")
+    divbody.classList.add("card-body")
+
+    let titleSpan=document.createElement("h5")
+    let titleSpanText = document.createTextNode(title);
+    titleSpan.append(titleSpanText);
+    titleSpan.classList.add("card-title")
+
+    let fecha=document.createElement("p")
+    fecha.textContent=date
+
+    cardli.append(picturespan,titleSpan, fecha);
+    return cardli;
+  }
+  getAllCards();
+
+// FILTERS
+
+let relevantButtom = document.getElementById("relevantButtom")
+let latestButtom = document.getElementById("latestButtom")
+let topButtom = document.getElementById("topButtom")
+let search = document.getElementById("filter-by-name")
+
+
+eventListeners ()
+
+function eventListeners () {
+  relevantButtom.addEventListener("click", relevantFuncion)
+  latestButtom.addEventListener("click", lastestFunction)
+  topButtom.addEventListener("click", topFunction)
+  search.addEventListener(" input", searchFunction)
+}
+
+
+
+
+function relevantFuncion () {
+  let relevantPost = datosObtenidos.filter((objeto)=>{ 
+    let numberOfName = objeto.title.length;
+    console.log("si sirvo relevant") 
+    
+    return numberOfName > 15;
+    
+  });
+  printAllCards(relevantPost); 
+} 
+
+
+
+function lastestFunction () {
+  let lastDate = datosObtenidos.sort((a, b) => new Date (b.date) - new Date (a.date));
+  console.log(lastDate)
+  printAllCards(lastDate)
+
+} 
+
+function topFunction () {
+    console.log("Si sirvo TOP")
+    
+}
+
+function searchFunction (e) {
+  let busquedaValor = e.target.value.toLowerCase();
+  console.log(busquedaValor)
+}
+
+//

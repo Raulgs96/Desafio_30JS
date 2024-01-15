@@ -14,7 +14,12 @@ document.querySelectorAll("#post-form input").forEach((input) => {
   const createPostObject = () => {
 
     let postObject = { title, description, name ,img ,imgprofile,date};
-    if (title && description && description) {
+    titleField.value=""
+    descriptionField.value=""
+    nameField.value=""
+    imgField.value=""
+    dateField.value=""
+    if (titleField.value && descriptionField.value && nameField.value && imgField.value && dateField.value) {
       return postObject;
     } else {
       document.getElementById("form-alert").classList.remove("d-none");
@@ -40,15 +45,24 @@ document.querySelectorAll("#post-form input").forEach((input) => {
     let description = descriptionField.value
     let name = nameField.value
     let img = imgField.value
-    let date = dateField.value
+    let date = dateField.value 
 
     let postObject = {title, description, name, img, date}
   
     console.log(postObject);
     let result = await createPostInDb(postObject);
     //console.log(result);
-
+    alert("post publicado!")
+    clearForm();
   });
+
+  const clearForm=()=>{
+    titleField.value=("")
+    descriptionField.value=("")
+    nameField.value=("")
+    imgField.value=("")
+    dateField.value=("")
+  }
   let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
   let usersWrapper = document.getElementById("users-wrapper");
   
