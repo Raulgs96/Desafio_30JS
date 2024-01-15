@@ -31,13 +31,12 @@ const getAllCards = async (card) => {
   };
 
   const createCardItem=(cardData)=>{
-    let { title, img, date} = cardData;
+    let { title, img, date, key,id} = cardData;
     let cardli=document.createElement("div");
     cardli.classList.add("card","mb-3")
 
     /* card */
     
-
     let picturespan=document.createElement("img")
     picturespan.src=img
     picturespan.classList.add("card-img-top")
@@ -52,8 +51,27 @@ const getAllCards = async (card) => {
 
     let fecha=document.createElement("p")
     fecha.textContent=date
-
-    cardli.append(picturespan,titleSpan, fecha);
+    /*botton enviar a otra pagina */
+    let verMas=document.createElement("button")
+    verMas.classList.add("btn", "btn-success", "detail-btn")
+    verMas.setAttribute("id", key);
+    verMas.dataset.charId = id;
+    verMas.addEventListener("click", (event) => {
+      console.log(key);
+      /*este listener va a abrir la vista "char-detail"*/
+      let charId = event.target.dataset.charId;
+      window.open(`../views/char-detail.html?charId=${charId}`);
+    })
+    
+    
+    cardli.append(picturespan,titleSpan, fecha, verMas);
     return cardli;
   }
+
+  let detailBtns = document.querySelectorAll(".detail-btn");
+
+  /* a cada botón, le agregamos un listener*/
+  
+
+  
   getAllCards();
