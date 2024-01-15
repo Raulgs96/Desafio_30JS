@@ -53,14 +53,16 @@ const getAllCards = async (card) => {
     fecha.textContent=date
     /*botton enviar a otra pagina */
     let verMas=document.createElement("button")
-    verMas.classList.add("btn", "btn-success", "detail-btn")
+    verMas.innerText="ver"
+    verMas.classList.add("btn", "btn-primary", "detail-btn")
     verMas.setAttribute("id", key);
-    verMas.dataset.charId = id;
+    verMas.dataset.charId = key;
+    /*evento del botton */
     verMas.addEventListener("click", (event) => {
       console.log(key);
       /*este listener va a abrir la vista "char-detail"*/
       let charId = event.target.dataset.charId;
-      window.open(`../views/char-detail.html?charId=${charId}`);
+      window.open(`./views/char-detail.html?charId=${key}`);
     })
     
     

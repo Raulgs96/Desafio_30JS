@@ -10,12 +10,18 @@ console.log(charId);
 
 const getCharById = async (charId) => {
   let response = await fetch(
-    `https://desafio30js-default-rtdb.firebaseio.com/.json?${charId}`
-    
+    `https://desafio30js-default-rtdb.firebaseio.com/posts/${charId}/.json`
   );
   let data = await response.json();
-  let { name } = data;
-  document.getElementById("name").innerText = name;
+  let {title , img , name, description, date} = data;
+  /*insertar datos en el contenido de la pagina */
+  let imagentop=document.getElementById("imagentop")
+  imagentop.src=img;
+  document.getElementById("titulo").innerText = title;
+  document.getElementById("autor").innerText = name;
+  document.getElementById("descripcion").innerText = description;
+  document.getElementById("fecha").innerText = date;
+  
   console.log(data);
 };
 getCharById(charId);
