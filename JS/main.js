@@ -1,3 +1,6 @@
+
+
+
 /*let postEntries = [];
 let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
 let usersWrapper = document.getElementById("users-wrapper");
@@ -317,4 +320,5 @@ function searchFunction (e) {
   console.log(busquedaValor)
 }
 
-//
+
+
