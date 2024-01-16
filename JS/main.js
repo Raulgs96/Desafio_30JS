@@ -11,14 +11,14 @@ const getAllCards = async (card) => {
     let cardsArray = Object.keys(data).map((key) => ({ ...data[key], key }));
     datosObtenidos=cardsArray
     /*ya que tenemos las canciones, imprimimos todas las canciones*/
-    console.log(data)
+    //console.log(data)
     printAllCards(cardsArray);
   };
   const printAllCards = (cards) => {
     console.log(cards);
     let cardslist = document.getElementById("cards-list");
     cardslist.innerHTML = "";
-    console.log(cards);
+   // console.log(cards);
     /*iteramos en el array para crear un li por cada canción*/
     cards.forEach((card) => {
         let cardItem = createCardItem(card);
@@ -103,21 +103,21 @@ function eventListeners () {
 function relevantFuncion () {
   let relevantPost = datosObtenidos.filter((objeto)=>{
     let numberOfName = objeto.title.length;
-    console.log("si sirvo relevant")
-    return numberOfName > 15;
+    //console.log("si sirvo relevant")
+    return numberOfName > 50;
   });
   printAllCards(relevantPost);
 }
 function lastestFunction () {
   let lastDate = datosObtenidos.sort((a, b) => new Date (b.date) - new Date (a.date));
-  console.log(lastDate)
+  //console.log(lastDate)
   printAllCards(lastDate)
 }
 function topFunction () {
   let relevantPost1 = datosObtenidos.filter((objeto)=>{
     let numberOfName = objeto.description.length;
-    console.log("si sirvo relevant")
-    return numberOfName > 50;
+    //console.log("si sirvo relevant")
+    return numberOfName > 250;
   });
   printAllCards(relevantPost1);
 }
@@ -125,8 +125,35 @@ function searchFunction (e) {
   let relevantPost2 = datosObtenidos.filter((objeto)=>{
     let titleText = e.target.value;
     let titleVar = objeto.title.toLowerCase();
-    console.log(titleText)
+    //console.log(titleText)
     return titleVar.includes(titleText)
 })
  printAllCards(relevantPost2)
 }
+
+//logout
+const logOut = () => {
+  localStorage.removeItem("token");
+  location.reload();
+
+}
+
+const view = () =>{
+  let btnLogout = document.getElementById("btn-logout");
+  let btnLogin = document.getElementById("btn-login");
+  let btnCreate = document.getElementById("btn-create");
+  let btnPost = document.getElementById("btn-post");
+
+  let token = localStorage.getItem("token");
+  if (token ){
+    btnLogout.classList.remove("d-none");
+    btnPost.classList.remove("d-none");
+    btnLogin.classList.add("d-none");
+    btnCreate.classList.add("d-none");
+  } else {
+
+  }
+}
+view()
+let logOutButton = document.getElementById("btn-logout");
+logOutButton.addEventListener("click", logOut);

@@ -9,6 +9,7 @@ document.querySelectorAll("#post-form input").forEach((input) => {
   let nameField = document.getElementById("name")
   let imgField = document.getElementById("img")
   let dateField = document.getElementById("date")
+  let returnButton = document.getElementById("return-post")
 
 
   const createPostObject = () => {
@@ -65,6 +66,10 @@ document.querySelectorAll("#post-form input").forEach((input) => {
   }
   let post_public = "https://desafio30js-default-rtdb.firebaseio.com/posts/.json";
   let usersWrapper = document.getElementById("users-wrapper");
+
+  returnButton.addEventListener("click", ()=>{
+    window.open("/index.html","_self")
+  })
   
   
   
