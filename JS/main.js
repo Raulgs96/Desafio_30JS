@@ -79,7 +79,8 @@ const getAllCards = async (card) => {
       console.log(key);
       /*este listener va a abrir la vista "char-detail"*/
       let charId = event.target.dataset.charId;
-      window.open(`./views/char-detail.html?charId=${key}`);
+      //window.open(`./views/char-detail.html?charId=${key}`);
+      window.location.href = `./views/char-detail.html?charId=${key}`;
     })
     
     cardli.append(picturespan,titleSpan, fecha, imgAvatar,nameUserText,verMas);
