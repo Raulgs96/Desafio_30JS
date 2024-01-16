@@ -31,7 +31,7 @@ const getAllCards = async (card) => {
   };
 
   const createCardItem=(cardData)=>{
-    let { title, img, date, key,id} = cardData;
+    let { title, img, date, key, name,id} = cardData;
     let cardli=document.createElement("div");
     cardli.classList.add("card","mb-3")
 
@@ -48,6 +48,24 @@ const getAllCards = async (card) => {
     let titleSpanText = document.createTextNode(title);
     titleSpan.append(titleSpanText);
     titleSpan.classList.add("card-title")
+    /* avatar */
+    let borderUser=document.createElement("div")
+    borderUser.classList.add("row")
+    let colAvatar=document.createElement("div")
+    colAvatar.classList.add("col-auto")
+    let imgAvatar=document.createElement("img")
+    imgAvatar.src="https://picsum.photos/200"
+    imgAvatar.style.borderRadius = "50%";
+    imgAvatar.classList.add("img-fluid")
+    imgAvatar.style.width = "50px";
+    imgAvatar.style.height = "50px";
+
+    let divUSer=document.createElement("div")
+    divUSer.classList.add("col")
+    let nameUserText = document.createElement("b");
+    let nameTextNode = document.createTextNode(name);
+
+    nameUserText.appendChild(nameTextNode);
 
     let fecha=document.createElement("p")
     fecha.textContent=date
@@ -66,7 +84,7 @@ const getAllCards = async (card) => {
     })
     
     
-    cardli.append(picturespan,titleSpan, fecha, verMas);
+    cardli.append(picturespan,titleSpan, fecha, imgAvatar,nameUserText,verMas);
     return cardli;
   }
 
